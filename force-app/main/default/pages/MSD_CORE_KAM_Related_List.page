@@ -12,63 +12,53 @@
         console.log(pageDest);
         window.open('/'+pageDest);
     }
-
 </script>
+<style>
+   .bPageBlock .pbBody .dataCol {
+       border:0px;
+   }
+   .bPageBlock .pbBody .labelCol {
+       border:0px;
+   }
+</style>
 
 
 <apex:outputPanel id="DOM" rendered="{!IF(account.MSD_CORE_KAM_Type__c = 'Key Account' , TRUE , FALSE)}">
-<Apex:form>
-<apex:pageBlock title="Trend and Differentiators">
-      <div align="center">
+<apex:pageBlock mode="maindetail">
+   <apex:relatedList list="Trend_and_Differentiators__r">
+      <apex:facet name="body">&nbsp;</apex:facet>
+      </apex:relatedList>   
+<!--      
+<div align="center">
       <apex:commandLink action="{!newObjcreate}" value="New" target="_new">
       <apex:param name="Object1" value="MSD_CORE_Trend_and_Differ__c" assignTo="{!Obj}"/>
       </apex:commandLink>
       </div>
-   <br/>
+   <br/> 
+   -->
+
       <apex:pageBlockTable value="{!account.Trend_and_Differentiators__r}" var="Trend" onRowClick="clickElem(this);">
          <apex:column value="{!Trend.Id}"/>
          <apex:column value="{!Trend.MSD_CORE_Name__c}"/>
          <apex:column value="{!Trend.MSD_CORE_Priority__c}"/>
          <apex:column value="{!Trend.MSD_CORE_Type__c}"/>
       </apex:pageBlockTable>
-   </apex:pageBlock>
+</apex:pageBlock>
 
-<!--
-   <apex:pageBlock title="Trend and Differentiators">
-      <div align="center">
-      <apex:commandLink action="{!newObjcreate}" value="New" target="_new">
-      <apex:param name="Object1" value="MSD_CORE_Trend_and_Differ__c" assignTo="{!Obj}"/>
-      </apex:commandLink>
-      </div>
-   <br/>
-      
-         <table>
-            <tr>
-            <th>Record ID</th>
-            <th>Name</th>
-            <th>Priority</th>
-            <th>Type</th>
-            </tr>
-            <apex:repeat value="{!account.Trend_and_Differentiators__r}" var="Trend">
-            <tr>
-               <td>{!Trend.Id}</td>
-               <td>{!Trend.MSD_CORE_Name__c}</td>   
-               <td>{!Trend.MSD_CORE_Priority__c}</td>
-               <td>{!Trend.MSD_CORE_Type__c}</td>
-            </tr>
-         </apex:repeat>
-         </table>
-     
-   </apex:pageBlock>
-
--->
+<apex:pageBlock mode="maindetail">
+   <apex:relatedList list="KA_Unique_Informations__r">
+      <apex:facet name="body">&nbsp;</apex:facet>
+      </apex:relatedList>
+   <!--
    <apex:pageBlock title="Unique Information">
       <div align="center">
          <apex:commandLink action="{!newObjcreate}" value="New" target="_new">
          <apex:param name="Object1" value="MSD_CORE_KA_Unique_Info__c" assignTo="{!Obj}"/>
          </apex:commandLink>
          </div>
-      <br/>
+      <br/> 
+      -->
+
     <apex:pageBlockTable value="{!account.KA_Unique_Informations__r}" var="Unique" onRowClick="clickElem(this);">
       <apex:column value="{!Unique.ID}"/>
        <apex:column value="{!Unique.Name}"/>
@@ -78,6 +68,11 @@
  </apex:pageBlock>
 
 
+ <apex:pageBlock mode="maindetail">
+   <apex:relatedList list="Account_TA_Priorities__r">
+      <apex:facet name="body">&nbsp;</apex:facet>
+      </apex:relatedList>
+<!--
  <apex:pageBlock title="Account TA Priorities">
 
    <div align="center">
@@ -86,7 +81,7 @@
       </apex:commandLink>
       </div>
    <br/>
-
+   -->
     <apex:pageBlockTable value="{!account.Account_TA_Priorities__r}" var="Priorities" onRowClick="clickElem(this);">
       <apex:column value="{!Priorities.ID}"/>
        <apex:column value="{!Priorities.Name}"/>
@@ -96,7 +91,11 @@
     </apex:pageBlockTable>
    </apex:pageBlock>
 
-
+   <apex:pageBlock mode="maindetail">
+      <apex:relatedList list="SWOC__r">
+         <apex:facet name="body">&nbsp;</apex:facet>
+         </apex:relatedList>
+   <!--
    <apex:pageBlock title="SWOC">
 
       <div align="center">
@@ -105,7 +104,7 @@
          </apex:commandLink>
          </div>
       <br/>
-
+      -->
     <apex:pageBlockTable value="{!account.SWOC__r}" var="swoc" onRowClick="clickElem(this);">
       <apex:column value="{!swoc.ID}"/>
        <apex:column value="{!swoc.Name}"/>
@@ -115,14 +114,21 @@
     </apex:pageBlockTable>
    </apex:pageBlock>
 
-   <apex:pageBlock title="Account Competitors">
 
+   <apex:pageBlock mode="maindetail">
+      <apex:relatedList list="Account_Competitors__r">
+         <apex:facet name="body">&nbsp;</apex:facet>
+         </apex:relatedList>
+   <!--
+   <apex:pageBlock title="Account Competitors">
       <div align="center">
          <apex:commandLink action="{!newObjcreate}" value="New" target="_new">
          <apex:param name="Object1" value="MSD_CORE_KA_Competitor__c" assignTo="{!Obj}"/>
          </apex:commandLink>
          </div>
       <br/>
+      -->
+
     <apex:pageBlockTable value="{!account.Account_Competitors__r}" var="Competitors" onRowClick="clickElem(this);">
       <apex:column value="{!Competitors.ID}"/>
        <apex:column value="{!Competitors.Name}"/>
@@ -131,14 +137,24 @@
        </apex:pageBlockTable>
    </apex:pageBlock>
 
-   <apex:pageBlock title="Stakeholder Overview (Account)">
+ 
 
+
+      <apex:pageBlock mode="maindetail">
+         <apex:relatedList list="Stakeholder_Maps__r">
+            <apex:facet name="body">&nbsp;</apex:facet>
+            </apex:relatedList>
+
+   <!--
+        <apex:pageBlock title="Stakeholder Overview (Account)">
       <div align="center">
          <apex:commandLink action="{!newObjcreate}" value="New" target="_new">
          <apex:param name="Object1" value="MSD_CORE_Stakeholder_Map__c" assignTo="{!Obj}"/>
          </apex:commandLink>
          </div>
       <br/>
+
+      -->
       <apex:pageBlockTable value="{!account.Stakeholder_Maps__r}" var="Stakeholders" onRowClick="clickElem(this);">
          <apex:column value="{!Stakeholders.ID}"/>
          <apex:column value="{!Stakeholders.Name}"/>
@@ -147,16 +163,20 @@
          </apex:pageBlockTable>
      </apex:pageBlock>
 
-
+     <apex:pageBlock mode="maindetail">
+         <apex:relatedList list="KA_Past_Programs__r">
+            <apex:facet name="body">&nbsp;</apex:facet>
+            </apex:relatedList>
+<!--
      <apex:pageBlock title="MSD Past Programs (Account)">
-
-
       <div align="center">
          <apex:commandLink action="{!newObjcreate}" value="New" target="_new">
          <apex:param name="Object1" value="MSD_CORE_KA_Past_Program__c" assignTo="{!Obj}"/>
          </apex:commandLink>
          </div>
       <br/>
+
+      -->
       <apex:pageBlockTable value="{!account.KA_Past_Programs__r}" var="Past_Programs" onRowClick="clickElem(this);">
          <apex:column value="{!Past_Programs.ID}"/>
          <apex:column value="{!Past_Programs.Name}"/>
@@ -169,15 +189,21 @@
          </apex:pageBlockTable>
      </apex:pageBlock>
 
+     <apex:pageBlock mode="maindetail">
+      <apex:relatedList list="MSD_CORE_Competitor_Activities__r">
+         <apex:facet name="body">&nbsp;</apex:facet>
+         </apex:relatedList>
+
+     <!--
      <apex:pageBlock title="Competitor Activities">
-
-
       <div align="center">
          <apex:commandLink action="{!newObjcreate}" value="New" target="_new">
          <apex:param name="Object1" value="MSD_CORE_Competitor_Activity__c" assignTo="{!Obj}"/>
          </apex:commandLink>
          </div>
       <br/>
+
+      -->
     <apex:pageBlockTable value="{!account.MSD_CORE_Competitor_Activities__r}" var="Competitors_ACT" onRowClick="clickElem(this);">
       <apex:column value="{!Competitors_ACT.ID}"/>
        <apex:column value="{!Competitors_ACT.Name}"/>
@@ -188,16 +214,19 @@
        </apex:pageBlockTable>
    </apex:pageBlock>
 
-
+   <apex:pageBlock mode="maindetail">
+      <apex:relatedList list="KA_Priorities__r">
+         <apex:facet name="body">&nbsp;</apex:facet>
+         </apex:relatedList>
+<!--
    <apex:pageBlock title="KA Priorities">
-
-
       <div align="center">
          <apex:commandLink action="{!newObjcreate}" value="New" target="_new">
          <apex:param name="Object1" value="MSD_CORE_KA_Priority__c" assignTo="{!Obj}"/>
          </apex:commandLink>
          </div>
       <br/>
+      -->
       <apex:pageBlockTable value="{!account.KA_Priorities__r}" var="ka_priorities" onRowClick="clickElem(this);">
          <apex:column value="{!ka_priorities.ID}"/>
          <apex:column value="{!ka_priorities.Name}"/>
@@ -207,16 +236,19 @@
          </apex:pageBlockTable>
      </apex:pageBlock>
 
-
-
+     <apex:pageBlock mode="maindetail">
+      <apex:relatedList list="Account_TA_Priorities__r">
+         <apex:facet name="body">&nbsp;</apex:facet>
+         </apex:relatedList>
+<!--
      <apex:pageBlock title="Account TA Priorities">
-
       <div align="center">
          <apex:commandLink action="{!newObjcreate}" value="New" target="_new">
          <apex:param name="Object1" value="MSD_CORE_Account_TA_Priority__c" assignTo="{!Obj}"/>
          </apex:commandLink>
          </div>
       <br/>
+      -->
       <apex:pageBlockTable value="{!account.Account_TA_Priorities__r}" var="Ta_priorities" onRowClick="clickElem(this);">
          <apex:column value="{!Ta_priorities.ID}"/>
          <apex:column value="{!Ta_priorities.Name}"/>
@@ -227,15 +259,21 @@
          </apex:pageBlockTable>
      </apex:pageBlock>
 
+     <apex:pageBlock mode="maindetail">
+      <apex:relatedList list="Product_Usages__r">
+         <apex:facet name="body">&nbsp;</apex:facet>
+         </apex:relatedList>
 
+<!--
      <apex:pageBlock title="Product Usage and Access Status">
-
       <div align="center">
          <apex:commandLink action="{!newObjcreate}" value="New" target="_new">
          <apex:param name="Object1" value="MSD_CORE_Product_Usage__c" assignTo="{!Obj}"/>
          </apex:commandLink>
          </div>
       <br/>
+
+      -->
       <apex:pageBlockTable value="{!account.Product_Usages__r}" var="P_Usage" onRowClick="clickElem(this);">
          <apex:column value="{!P_Usage.ID}"/>
          <apex:column value="{!P_Usage.Name}"/>
@@ -245,13 +283,15 @@
          </apex:pageBlockTable>
      </apex:pageBlock>
 
-
-</Apex:form>
 </apex:outputPanel>
 
 <apex:outputPanel rendered="{!IF(account.MSD_CORE_KAM_Type__c = 'Strategic Account' , TRUE , FALSE)}">
-   <apex:form>
-   <apex:pageBlock title="Account TA Priorities">
+   <apex:pageBlock mode="maindetail">
+      <apex:relatedList list="Account_TA_Priorities__r">
+         <apex:facet name="body">&nbsp;</apex:facet>
+         </apex:relatedList>
+<!--
+<apex:pageBlock title="Account TA Priorities">
 
       <div align="center">
          <apex:commandLink action="{!newObjcreate}" value="New" target="_new">
@@ -259,6 +299,7 @@
          </apex:commandLink>
          </div>
       <br/>
+      -->
       <apex:pageBlockTable value="{!account.Account_TA_Priorities__r}" var="Priorities" onRowClick="clickElem(this);">
          <apex:column value="{!Priorities.ID}"/>
          <apex:column value="{!Priorities.Name}"/>
@@ -268,6 +309,12 @@
       </apex:pageBlockTable>
      </apex:pageBlock>
 
+
+     <apex:pageBlock mode="maindetail">
+      <apex:relatedList list="Stakeholder_Maps__r">
+         <apex:facet name="body">&nbsp;</apex:facet>
+         </apex:relatedList>
+     <!--
      <apex:pageBlock title="Stakeholder Overview (Account)">
       <div align="center">
          <apex:commandLink action="{!newObjcreate}" value="New" target="_new">
@@ -275,7 +322,7 @@
          </apex:commandLink>
          </div>
       <br/>
-
+      -->
       <apex:pageBlockTable value="{!account.Stakeholder_Maps__r}" var="Stakeholders" onRowClick="clickElem(this);">
          <apex:column value="{!Stakeholders.ID}"/>
          <apex:column value="{!Stakeholders.Name}"/>
@@ -284,6 +331,12 @@
          </apex:pageBlockTable>
      </apex:pageBlock>
 
+
+     <apex:pageBlock mode="maindetail">
+      <apex:relatedList list="Product_Usages__r">
+         <apex:facet name="body">&nbsp;</apex:facet>
+         </apex:relatedList>
+     <!--
      <apex:pageBlock title="Product Usage and Access Status">
 
       <div align="center">
@@ -292,6 +345,7 @@
          </apex:commandLink>
          </div>
       <br/>
+      -->
       <apex:pageBlockTable value="{!account.Product_Usages__r}" var="P_Usage" onRowClick="clickElem(this);">
          <apex:column value="{!P_Usage.ID}"/>
          <apex:column value="{!P_Usage.Name}"/>
@@ -303,7 +357,6 @@
 
 
 
-  </Apex:form>
   </apex:outputPanel>
 
 
