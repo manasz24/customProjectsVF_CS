@@ -1,363 +1,247 @@
 <apex:page standardController="Account" extensions="KAM_controller_ext" sidebar="false" showHeader="false">
-<apex:slds/> 
+   <apex:slds />
 
-<apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js" />;
+   <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js" />;
 
-<script type="text/javascript">
-    $j = jQuery.noConflict();
-    function clickElem(elem){
+   <script type="text/javascript">
+      $j = jQuery.noConflict();
+      function clickElem(elem) {
 
-       console.log(elem);
-        var pageDest = $j(elem).find("span").html();
-        console.log(pageDest);
-        window.open('/'+pageDest);
-    }
-</script>
-<style>
-   .bPageBlock .pbBody .dataCol {
-       border:0px;
-   }
-   .bPageBlock .pbBody .labelCol {
-       border:0px;
-   }
-</style>
+         console.log(elem);
+         var pageDest = $j(elem).find("span").html();
+         console.log(pageDest);
+         window.open('/' + pageDest);
+      }
+   </script>
+   <style>
+      .bPageBlock .pbBody .dataCol {
+         border: 0px;
+      }
+
+      .bPageBlock .pbBody .labelCol {
+         border: 0px;
+      }
+   </style>
+
+   <apex:outputPanel id="DOM" rendered="{!IF(account.MSD_CORE_KAM_Type__c = 'Key Account' , TRUE , FALSE)}">
+      <apex:pageBlock mode="maindetail">    <!--SWOT-->
+         <apex:relatedList list="SWOC__r">
+            <apex:facet name="body">&nbsp;</apex:facet>
+         </apex:relatedList>
+
+         <apex:pageBlockTable value="{!account.SWOC__r}" var="swoc" onRowClick="clickElem(this);">
+            <apex:column value="{!swoc.ID}" />
+            <apex:column value="{!swoc.Name}" />
+            <apex:column value="{!swoc.MSD_CORE_Franchise__c}" />
+            <apex:column value="{!swoc.MSD_CORE_Start_Date__c	}" />
+            <apex:column value="{!swoc.MSD_CORE_End_Date__c}" />
+         </apex:pageBlockTable>
+      </apex:pageBlock>
+
+      <apex:pageBlock mode="maindetail">    <!--Account Competitors-->
+         <apex:relatedList list="Account_Competitors__r">
+            <apex:facet name="body">&nbsp;</apex:facet>
+         </apex:relatedList>
 
 
-<apex:outputPanel id="DOM" rendered="{!IF(account.MSD_CORE_KAM_Type__c = 'Key Account' , TRUE , FALSE)}">
-<apex:pageBlock mode="maindetail">
-   <apex:relatedList list="Trend_and_Differentiators__r">
-      <apex:facet name="body">&nbsp;</apex:facet>
-      </apex:relatedList>   
-<!--      
-<div align="center">
-      <apex:commandLink action="{!newObjcreate}" value="New" target="_new">
-      <apex:param name="Object1" value="MSD_CORE_Trend_and_Differ__c" assignTo="{!Obj}"/>
-      </apex:commandLink>
-      </div>
-   <br/> 
-   -->
+         <apex:pageBlockTable value="{!account.Account_Competitors__r}" var="Competitors" onRowClick="clickElem(this);">
+            <apex:column value="{!Competitors.ID}" />
+            <apex:column value="{!Competitors.Name}" />
+            <apex:column value="{!Competitors.MSD_CORE_Competitor_Account__c}" />
+            <apex:column value="{!Competitors.MSD_CORE_Therapeutic_Area_Name__c}" />
+         </apex:pageBlockTable>
+      </apex:pageBlock>
 
-      <apex:pageBlockTable value="{!account.Trend_and_Differentiators__r}" var="Trend" onRowClick="clickElem(this);">
-         <apex:column value="{!Trend.Id}"/>
-         <apex:column value="{!Trend.MSD_CORE_Name__c}"/>
-         <apex:column value="{!Trend.MSD_CORE_Priority__c}"/>
-         <apex:column value="{!Trend.MSD_CORE_Type__c}"/>
+      <apex:pageBlock mode="maindetail">    <!--Trend and Diff-->
+         <apex:relatedList list="Trend_and_Differentiators__r">
+            <apex:facet name="body">&nbsp;</apex:facet>
+         </apex:relatedList>
+
+         <apex:pageBlockTable value="{!account.Trend_and_Differentiators__r}" var="Trend" onRowClick="clickElem(this);">
+            <apex:column value="{!Trend.Id}" />
+            <apex:column value="{!Trend.MSD_CORE_Name__c}" />
+            <apex:column value="{!Trend.MSD_CORE_Priority__c}" />
+            <apex:column value="{!Trend.MSD_CORE_Type__c}" />
+         </apex:pageBlockTable>
+      </apex:pageBlock>
+
+      <apex:pageBlock mode="maindetail">    <!--Product Usage-->
+         <apex:relatedList list="Product_Usages__r">
+            <apex:facet name="body">&nbsp;</apex:facet>
+         </apex:relatedList>
+
+
+         <apex:pageBlockTable value="{!account.Product_Usages__r}" var="P_Usage" onRowClick="clickElem(this);">
+            <apex:column value="{!P_Usage.ID}" />
+            <apex:column value="{!P_Usage.Name}" />
+            <apex:column value="{!P_Usage.MSD_CORE_Access_Restriction_Type__c}" />
+            <apex:column value="{!P_Usage.MSD_CORE_Product_Name__c}" />
+            <apex:column value="{!P_Usage.MSD_CORE_Description__c}" />
+         </apex:pageBlockTable>
+      </apex:pageBlock>
+
+      <apex:pageBlock mode="maindetail">    <!--Stakeholder Ov-->
+         <apex:relatedList list="Stakeholder_Maps__r">
+            <apex:facet name="body">&nbsp;</apex:facet>
+         </apex:relatedList>
+
+
+         <apex:pageBlockTable value="{!account.Stakeholder_Maps__r}" var="Stakeholders" onRowClick="clickElem(this);">
+            <apex:column value="{!Stakeholders.ID}" />
+            <apex:column value="{!Stakeholders.Name}" />
+            <apex:column value="{!Stakeholders.MSD_CORE_Role__c}" />
+            <apex:column value="{!Stakeholders.MSD_CORE_Stakeholder__c}" />
+         </apex:pageBlockTable>
+      </apex:pageBlock>
+
+      <apex:pageBlock mode="maindetail">    <!--MSD Past Programs-->
+         <apex:relatedList list="KA_Past_Programs__r">
+            <apex:facet name="body">&nbsp;</apex:facet>
+         </apex:relatedList>
+
+         <apex:pageBlockTable value="{!account.KA_Past_Programs__r}" var="Past_Programs" onRowClick="clickElem(this);">
+            <apex:column value="{!Past_Programs.ID}" />
+            <apex:column value="{!Past_Programs.Name}" />
+            <apex:column value="{!Past_Programs.MSD_CORE_Name__c}" />
+            <apex:column value="{!Past_Programs.MSD_CORE_Previous_Stakeholder__c}" />
+            <apex:column value="{!Past_Programs.MSD_CORE_Status__c}" />
+            <apex:column value="{!Past_Programs.MSD_CORE_Start_Date__c}" />
+            <apex:column value="{!Past_Programs.MSD_CORE_End_Date__c}" />
+            <apex:column value="{!Past_Programs.MSD_CORE_Type__c}" />
+         </apex:pageBlockTable>
+      </apex:pageBlock>
+
+      <apex:pageBlock mode="maindetail">    <!--CompT Activity-->
+         <apex:relatedList list="MSD_CORE_Competitor_Activities__r">
+            <apex:facet name="body">&nbsp;</apex:facet>
+         </apex:relatedList>
+         <apex:pageBlockTable value="{!account.MSD_CORE_Competitor_Activities__r}" var="Competitors_ACT" onRowClick="clickElem(this);">
+            <apex:column value="{!Competitors_ACT.ID}" />
+            <apex:column value="{!Competitors_ACT.Name}" />
+            <apex:column value="{!Competitors_ACT.MSD_CORE_Company_Name__c}" />
+            <apex:column value="{!Competitors_ACT.MSD_CORE_Competitor_Activity__c}" />
+            <apex:column value="{!Competitors_ACT.MSD_CORE_Product_of_Competitor__c}" />
+            <apex:column value="{!Competitors_ACT.MSD_CORE_Therapeutic_Area_c__c}" />
+         </apex:pageBlockTable>
+      </apex:pageBlock>
+
+      <apex:pageBlock mode="maindetail">     <!--Unique Info-->
+         <apex:relatedList list="KA_Unique_Informations__r">
+            <apex:facet name="body">&nbsp;</apex:facet>
+         </apex:relatedList>
+
+         <apex:pageBlockTable value="{!account.KA_Unique_Informations__r}" var="Unique" onRowClick="clickElem(this);">
+            <apex:column value="{!Unique.ID}" />
+            <apex:column value="{!Unique.Name}" />
+            <apex:column value="{!Unique.MSD_CORE_Name__c}" />
+            <apex:column value="{!Unique.MSD_CORE_Unique_Info__c}" />
+         </apex:pageBlockTable>
+      </apex:pageBlock>
+
+      <apex:pageBlock mode="maindetail">     <!--KA Priorities-->
+         <apex:relatedList list="KA_Priorities__r">
+            <apex:facet name="body">&nbsp;</apex:facet>
+         </apex:relatedList>
+
+         <apex:pageBlockTable value="{!account.KA_Priorities__r}" var="ka_priorities" onRowClick="clickElem(this);">
+            <apex:column value="{!ka_priorities.ID}" />
+            <apex:column value="{!ka_priorities.Name}" />
+            <apex:column value="{!ka_priorities.MSD_CORE_Country_Code__c}" />
+            <apex:column value="{!ka_priorities.MSD_CORE_Start_Date__c}" />
+            <apex:column value="{!ka_priorities.MSD_CORE_End_Date__c}" />
+         </apex:pageBlockTable>
+      </apex:pageBlock>
+
+      <apex:pageBlock mode="maindetail">     <!--Acc TA Priorities-->
+         <apex:relatedList list="Account_TA_Priorities__r">
+            <apex:facet name="body">&nbsp;</apex:facet>
+         </apex:relatedList>
+
+         <apex:pageBlockTable value="{!account.Account_TA_Priorities__r}" var="Priorities" onRowClick="clickElem(this);">
+            <apex:column value="{!Priorities.ID}" />
+            <apex:column value="{!Priorities.Name}" />
+            <apex:column value="{!Priorities.MSD_CORE_Priority__c}" />
+            <apex:column value="{!Priorities.MSD_CORE_TA_Priority__c}" />
+            <apex:column value="{!Priorities.MSD_CORE_TA_Priority_Type__c}" />
+         </apex:pageBlockTable>
+      </apex:pageBlock>   
+
+      <apex:pageBlock mode="maindetail">     <!--Opportunities-->
+         <apex:relatedList list="Opportunities__r">
+            <apex:facet name="body">&nbsp;</apex:facet>
+         </apex:relatedList>
+         <apex:pageBlockTable value="{!account.Opportunities__r}" var="Opty" onRowClick="clickElem(this);">
+            <apex:column value="{!Opty.ID}" />
+            <apex:column value="{!Opty.Name}" />
+            <apex:column value="{!Opty.MSD_CORE_KA_Priority__c}" />
+            <apex:column value="{!Opty.MSD_CORE_Description__c}" />
+            <apex:column value="{!Opty.MSD_CORE_Status__c}" />
+            <apex:column value="{!Opty.MSD_CORE_Opportunity_Type__c}" />
+            <apex:column value="{!Opty.MSD_CORE_MSD_Priority__c}" />
+            <apex:column value="{!Opty.Createddate}" />
+         </apex:pageBlockTable>
+      </apex:pageBlock>
+      
+      <apex:pageBlock mode="maindetail">     <!--Initiatives-->
+      <apex:relatedList list="Account_Plan_vod__r">
+         <apex:facet name="body">&nbsp;</apex:facet>
+      </apex:relatedList>
+      <apex:pageBlockTable value="{!account.Account_Plan_vod__r}" var="Init" onRowClick="clickElem(this);">
+         <apex:column value="{!Init.ID}" />
+         <apex:column value="{!Init.Name}" />
+         <apex:column value="{!Init.RecordType.Developername}" />
+         <apex:column value="{!Init.Type__c}" />
+         <apex:column value="{!Init.MSD_CORE_KAM_Init_Name__c}" />
+         <apex:column value="{!Init.MSD_CORE_Opportunity__c}" />
+         <apex:column value="{!Init.MSD_CORE_Account_Plan_Owner__c}" />
+         <apex:column value="{!Init.LastModifiedDate}" />
       </apex:pageBlockTable>
-</apex:pageBlock>
-
-<apex:pageBlock mode="maindetail">
-   <apex:relatedList list="KA_Unique_Informations__r">
-      <apex:facet name="body">&nbsp;</apex:facet>
-      </apex:relatedList>
-   <!--
-   <apex:pageBlock title="Unique Information">
-      <div align="center">
-         <apex:commandLink action="{!newObjcreate}" value="New" target="_new">
-         <apex:param name="Object1" value="MSD_CORE_KA_Unique_Info__c" assignTo="{!Obj}"/>
-         </apex:commandLink>
-         </div>
-      <br/> 
-      -->
-
-    <apex:pageBlockTable value="{!account.KA_Unique_Informations__r}" var="Unique" onRowClick="clickElem(this);">
-      <apex:column value="{!Unique.ID}"/>
-       <apex:column value="{!Unique.Name}"/>
-       <apex:column value="{!Unique.MSD_CORE_Name__c}"/>
-       <apex:column value="{!Unique.MSD_CORE_Unique_Info__c}"/>
-    </apex:pageBlockTable>
- </apex:pageBlock>
-
-
- <apex:pageBlock mode="maindetail">
-   <apex:relatedList list="Account_TA_Priorities__r">
-      <apex:facet name="body">&nbsp;</apex:facet>
-      </apex:relatedList>
-<!--
- <apex:pageBlock title="Account TA Priorities">
-
-   <div align="center">
-      <apex:commandLink action="{!newObjcreate}" value="New" target="_new">
-      <apex:param name="Object1" value="MSD_CORE_Account_TA_Priority__c" assignTo="{!Obj}"/>
-      </apex:commandLink>
-      </div>
-   <br/>
-   -->
-    <apex:pageBlockTable value="{!account.Account_TA_Priorities__r}" var="Priorities" onRowClick="clickElem(this);">
-      <apex:column value="{!Priorities.ID}"/>
-       <apex:column value="{!Priorities.Name}"/>
-       <apex:column value="{!Priorities.MSD_CORE_Priority__c}"/>
-       <apex:column value="{!Priorities.MSD_CORE_TA_Priority__c}"/>
-       <apex:column value="{!Priorities.MSD_CORE_TA_Priority_Type__c}"/>
-    </apex:pageBlockTable>
    </apex:pageBlock>
 
-   <apex:pageBlock mode="maindetail">
-      <apex:relatedList list="SWOC__r">
-         <apex:facet name="body">&nbsp;</apex:facet>
+   </apex:outputPanel>
+
+   <apex:outputPanel rendered="{!IF(account.MSD_CORE_KAM_Type__c = 'Strategic Account' , TRUE , FALSE)}">
+      <apex:pageBlock mode="maindetail">
+         <apex:relatedList list="Account_TA_Priorities__r">
+            <apex:facet name="body">&nbsp;</apex:facet>
          </apex:relatedList>
-   <!--
-   <apex:pageBlock title="SWOC">
 
-      <div align="center">
-         <apex:commandLink action="{!newObjcreate}" value="New" target="_new">
-         <apex:param name="Object1" value="MSD_CORE_SWOC__c" assignTo="{!Obj}"/>
-         </apex:commandLink>
-         </div>
-      <br/>
-      -->
-    <apex:pageBlockTable value="{!account.SWOC__r}" var="swoc" onRowClick="clickElem(this);">
-      <apex:column value="{!swoc.ID}"/>
-       <apex:column value="{!swoc.Name}"/>
-       <apex:column value="{!swoc.MSD_CORE_Franchise__c}"/>
-       <apex:column value="{!swoc.MSD_CORE_Start_Date__c	}"/>
-       <apex:column value="{!swoc.MSD_CORE_End_Date__c}"/>
-    </apex:pageBlockTable>
-   </apex:pageBlock>
-
-
-   <apex:pageBlock mode="maindetail">
-      <apex:relatedList list="Account_Competitors__r">
-         <apex:facet name="body">&nbsp;</apex:facet>
-         </apex:relatedList>
-   <!--
-   <apex:pageBlock title="Account Competitors">
-      <div align="center">
-         <apex:commandLink action="{!newObjcreate}" value="New" target="_new">
-         <apex:param name="Object1" value="MSD_CORE_KA_Competitor__c" assignTo="{!Obj}"/>
-         </apex:commandLink>
-         </div>
-      <br/>
-      -->
-
-    <apex:pageBlockTable value="{!account.Account_Competitors__r}" var="Competitors" onRowClick="clickElem(this);">
-      <apex:column value="{!Competitors.ID}"/>
-       <apex:column value="{!Competitors.Name}"/>
-       <apex:column value="{!Competitors.MSD_CORE_Competitor_Account__c}"/>
-       <apex:column value="{!Competitors.MSD_CORE_Therapeutic_Area_Name__c}"/>
-       </apex:pageBlockTable>
-   </apex:pageBlock>
-
- 
-
+         <apex:pageBlockTable value="{!account.Account_TA_Priorities__r}" var="Priorities" onRowClick="clickElem(this);">
+            <apex:column value="{!Priorities.ID}" />
+            <apex:column value="{!Priorities.Name}" />
+            <apex:column value="{!Priorities.MSD_CORE_Priority__c}" />
+            <apex:column value="{!Priorities.MSD_CORE_TA_Priority__c}" />
+            <apex:column value="{!Priorities.MSD_CORE_TA_Priority_Type__c}" />
+         </apex:pageBlockTable>
+      </apex:pageBlock>
 
       <apex:pageBlock mode="maindetail">
          <apex:relatedList list="Stakeholder_Maps__r">
             <apex:facet name="body">&nbsp;</apex:facet>
-            </apex:relatedList>
+         </apex:relatedList>
 
-   <!--
-        <apex:pageBlock title="Stakeholder Overview (Account)">
-      <div align="center">
-         <apex:commandLink action="{!newObjcreate}" value="New" target="_new">
-         <apex:param name="Object1" value="MSD_CORE_Stakeholder_Map__c" assignTo="{!Obj}"/>
-         </apex:commandLink>
-         </div>
-      <br/>
-
-      -->
-      <apex:pageBlockTable value="{!account.Stakeholder_Maps__r}" var="Stakeholders" onRowClick="clickElem(this);">
-         <apex:column value="{!Stakeholders.ID}"/>
-         <apex:column value="{!Stakeholders.Name}"/>
-         <apex:column value="{!Stakeholders.MSD_CORE_Role__c}"/>
-         <apex:column value="{!Stakeholders.MSD_CORE_Stakeholder__c}"/>
+         <apex:pageBlockTable value="{!account.Stakeholder_Maps__r}" var="Stakeholders" onRowClick="clickElem(this);">
+            <apex:column value="{!Stakeholders.ID}" />
+            <apex:column value="{!Stakeholders.Name}" />
+            <apex:column value="{!Stakeholders.MSD_CORE_Role__c}" />
+            <apex:column value="{!Stakeholders.MSD_CORE_Stakeholder__c}" />
          </apex:pageBlockTable>
-     </apex:pageBlock>
+      </apex:pageBlock>
 
-     <apex:pageBlock mode="maindetail">
-         <apex:relatedList list="KA_Past_Programs__r">
+      <apex:pageBlock mode="maindetail">
+         <apex:relatedList list="Product_Usages__r">
             <apex:facet name="body">&nbsp;</apex:facet>
-            </apex:relatedList>
-<!--
-     <apex:pageBlock title="MSD Past Programs (Account)">
-      <div align="center">
-         <apex:commandLink action="{!newObjcreate}" value="New" target="_new">
-         <apex:param name="Object1" value="MSD_CORE_KA_Past_Program__c" assignTo="{!Obj}"/>
-         </apex:commandLink>
-         </div>
-      <br/>
+         </apex:relatedList>
 
-      -->
-      <apex:pageBlockTable value="{!account.KA_Past_Programs__r}" var="Past_Programs" onRowClick="clickElem(this);">
-         <apex:column value="{!Past_Programs.ID}"/>
-         <apex:column value="{!Past_Programs.Name}"/>
-         <apex:column value="{!Past_Programs.MSD_CORE_Name__c}"/>
-         <apex:column value="{!Past_Programs.MSD_CORE_Previous_Stakeholder__c}"/>
-         <apex:column value="{!Past_Programs.MSD_CORE_Status__c}"/>
-         <apex:column value="{!Past_Programs.MSD_CORE_Start_Date__c}"/>
-         <apex:column value="{!Past_Programs.MSD_CORE_End_Date__c}"/>
-         <apex:column value="{!Past_Programs.MSD_CORE_Type__c}"/>
+         <apex:pageBlockTable value="{!account.Product_Usages__r}" var="P_Usage" onRowClick="clickElem(this);">
+            <apex:column value="{!P_Usage.ID}" />
+            <apex:column value="{!P_Usage.Name}" />
+            <apex:column value="{!P_Usage.MSD_CORE_Access_Restriction_Type__c}" />
+            <apex:column value="{!P_Usage.MSD_CORE_Product_Name__c}" />
+            <apex:column value="{!P_Usage.MSD_CORE_Description__c}" />
          </apex:pageBlockTable>
-     </apex:pageBlock>
+      </apex:pageBlock>
 
-     <apex:pageBlock mode="maindetail">
-      <apex:relatedList list="MSD_CORE_Competitor_Activities__r">
-         <apex:facet name="body">&nbsp;</apex:facet>
-         </apex:relatedList>
-
-     <!--
-     <apex:pageBlock title="Competitor Activities">
-      <div align="center">
-         <apex:commandLink action="{!newObjcreate}" value="New" target="_new">
-         <apex:param name="Object1" value="MSD_CORE_Competitor_Activity__c" assignTo="{!Obj}"/>
-         </apex:commandLink>
-         </div>
-      <br/>
-
-      -->
-    <apex:pageBlockTable value="{!account.MSD_CORE_Competitor_Activities__r}" var="Competitors_ACT" onRowClick="clickElem(this);">
-      <apex:column value="{!Competitors_ACT.ID}"/>
-       <apex:column value="{!Competitors_ACT.Name}"/>
-       <apex:column value="{!Competitors_ACT.MSD_CORE_Company_Name__c}"/>
-       <apex:column value="{!Competitors_ACT.MSD_CORE_Competitor_Activity__c}"/>
-       <apex:column value="{!Competitors_ACT.MSD_CORE_Product_of_Competitor__c}"/>
-       <apex:column value="{!Competitors_ACT.MSD_CORE_Therapeutic_Area_c__c}"/>
-       </apex:pageBlockTable>
-   </apex:pageBlock>
-
-   <apex:pageBlock mode="maindetail">
-      <apex:relatedList list="KA_Priorities__r">
-         <apex:facet name="body">&nbsp;</apex:facet>
-         </apex:relatedList>
-<!--
-   <apex:pageBlock title="KA Priorities">
-      <div align="center">
-         <apex:commandLink action="{!newObjcreate}" value="New" target="_new">
-         <apex:param name="Object1" value="MSD_CORE_KA_Priority__c" assignTo="{!Obj}"/>
-         </apex:commandLink>
-         </div>
-      <br/>
-      -->
-      <apex:pageBlockTable value="{!account.KA_Priorities__r}" var="ka_priorities" onRowClick="clickElem(this);">
-         <apex:column value="{!ka_priorities.ID}"/>
-         <apex:column value="{!ka_priorities.Name}"/>
-         <apex:column value="{!ka_priorities.MSD_CORE_Country_Code__c}"/>
-         <apex:column value="{!ka_priorities.MSD_CORE_Start_Date__c}"/>
-         <apex:column value="{!ka_priorities.MSD_CORE_End_Date__c}"/>
-         </apex:pageBlockTable>
-     </apex:pageBlock>
-
-     <apex:pageBlock mode="maindetail">
-      <apex:relatedList list="Account_TA_Priorities__r">
-         <apex:facet name="body">&nbsp;</apex:facet>
-         </apex:relatedList>
-<!--
-     <apex:pageBlock title="Account TA Priorities">
-      <div align="center">
-         <apex:commandLink action="{!newObjcreate}" value="New" target="_new">
-         <apex:param name="Object1" value="MSD_CORE_Account_TA_Priority__c" assignTo="{!Obj}"/>
-         </apex:commandLink>
-         </div>
-      <br/>
-      -->
-      <apex:pageBlockTable value="{!account.Account_TA_Priorities__r}" var="Ta_priorities" onRowClick="clickElem(this);">
-         <apex:column value="{!Ta_priorities.ID}"/>
-         <apex:column value="{!Ta_priorities.Name}"/>
-         <apex:column value="{!Ta_priorities.MSD_CORE_TA_Priority__c}"/>
-         <apex:column value="{!Ta_priorities.MSD_CORE_TA_Priority_Type__c}"/>
-         <apex:column value="{!Ta_priorities.MSD_CORE_Priority__c}"/>
-         <apex:column value="{!Ta_priorities.MSD_CORE_TA__c}"/>
-         </apex:pageBlockTable>
-     </apex:pageBlock>
-
-     <apex:pageBlock mode="maindetail">
-      <apex:relatedList list="Product_Usages__r">
-         <apex:facet name="body">&nbsp;</apex:facet>
-         </apex:relatedList>
-
-<!--
-     <apex:pageBlock title="Product Usage and Access Status">
-      <div align="center">
-         <apex:commandLink action="{!newObjcreate}" value="New" target="_new">
-         <apex:param name="Object1" value="MSD_CORE_Product_Usage__c" assignTo="{!Obj}"/>
-         </apex:commandLink>
-         </div>
-      <br/>
-
-      -->
-      <apex:pageBlockTable value="{!account.Product_Usages__r}" var="P_Usage" onRowClick="clickElem(this);">
-         <apex:column value="{!P_Usage.ID}"/>
-         <apex:column value="{!P_Usage.Name}"/>
-         <apex:column value="{!P_Usage.MSD_CORE_Access_Restriction_Type__c}"/>
-         <apex:column value="{!P_Usage.MSD_CORE_Product_Name__c}"/>
-         <apex:column value="{!P_Usage.MSD_CORE_Description__c}"/>
-         </apex:pageBlockTable>
-     </apex:pageBlock>
-
-</apex:outputPanel>
-
-<apex:outputPanel rendered="{!IF(account.MSD_CORE_KAM_Type__c = 'Strategic Account' , TRUE , FALSE)}">
-   <apex:pageBlock mode="maindetail">
-      <apex:relatedList list="Account_TA_Priorities__r">
-         <apex:facet name="body">&nbsp;</apex:facet>
-         </apex:relatedList>
-<!--
-<apex:pageBlock title="Account TA Priorities">
-
-      <div align="center">
-         <apex:commandLink action="{!newObjcreate}" value="New" target="_new">
-         <apex:param name="Object1" value="MSD_CORE_Account_TA_Priority__c" assignTo="{!Obj}"/>
-         </apex:commandLink>
-         </div>
-      <br/>
-      -->
-      <apex:pageBlockTable value="{!account.Account_TA_Priorities__r}" var="Priorities" onRowClick="clickElem(this);">
-         <apex:column value="{!Priorities.ID}"/>
-         <apex:column value="{!Priorities.Name}"/>
-         <apex:column value="{!Priorities.MSD_CORE_Priority__c}"/>
-         <apex:column value="{!Priorities.MSD_CORE_TA_Priority__c}"/>
-         <apex:column value="{!Priorities.MSD_CORE_TA_Priority_Type__c}"/>
-      </apex:pageBlockTable>
-     </apex:pageBlock>
-
-
-     <apex:pageBlock mode="maindetail">
-      <apex:relatedList list="Stakeholder_Maps__r">
-         <apex:facet name="body">&nbsp;</apex:facet>
-         </apex:relatedList>
-     <!--
-     <apex:pageBlock title="Stakeholder Overview (Account)">
-      <div align="center">
-         <apex:commandLink action="{!newObjcreate}" value="New" target="_new">
-         <apex:param name="Object1" value="MSD_CORE_Stakeholder_Map__c" assignTo="{!Obj}"/>
-         </apex:commandLink>
-         </div>
-      <br/>
-      -->
-      <apex:pageBlockTable value="{!account.Stakeholder_Maps__r}" var="Stakeholders" onRowClick="clickElem(this);">
-         <apex:column value="{!Stakeholders.ID}"/>
-         <apex:column value="{!Stakeholders.Name}"/>
-         <apex:column value="{!Stakeholders.MSD_CORE_Role__c}"/>
-         <apex:column value="{!Stakeholders.MSD_CORE_Stakeholder__c}"/>
-         </apex:pageBlockTable>
-     </apex:pageBlock>
-
-
-     <apex:pageBlock mode="maindetail">
-      <apex:relatedList list="Product_Usages__r">
-         <apex:facet name="body">&nbsp;</apex:facet>
-         </apex:relatedList>
-     <!--
-     <apex:pageBlock title="Product Usage and Access Status">
-
-      <div align="center">
-         <apex:commandLink action="{!newObjcreate}" value="New" target="_new">
-         <apex:param name="Object1" value="MSD_CORE_Product_Usage__c" assignTo="{!Obj}"/>
-         </apex:commandLink>
-         </div>
-      <br/>
-      -->
-      <apex:pageBlockTable value="{!account.Product_Usages__r}" var="P_Usage" onRowClick="clickElem(this);">
-         <apex:column value="{!P_Usage.ID}"/>
-         <apex:column value="{!P_Usage.Name}"/>
-         <apex:column value="{!P_Usage.MSD_CORE_Access_Restriction_Type__c}"/>
-         <apex:column value="{!P_Usage.MSD_CORE_Product_Name__c}"/>
-         <apex:column value="{!P_Usage.MSD_CORE_Description__c}"/>
-         </apex:pageBlockTable>
-     </apex:pageBlock>
-
-
-
-  </apex:outputPanel>
-
+   </apex:outputPanel>
 
 </apex:page>
