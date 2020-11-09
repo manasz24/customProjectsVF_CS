@@ -95,8 +95,11 @@
             <apex:column value="{!P_Usage.ID}" />
             <apex:column value="{!P_Usage.MSD_CORE_Product_Name__c}" />
             <apex:column value="{!P_Usage.MSD_CORE_Therapeutic_Area_1__c}" />
-            <apex:column value="{!P_Usage.MSD_CORE_Access_Reasons_Desc__c}" />
+            <apex:column value="{!P_Usage.MSD_CORE_Product_Access__c}" />
             <apex:column value="{!P_Usage.MSD_CORE_Access_Restriction_Type__c}" />
+            <apex:column value="{!P_Usage.MSD_CORE_Reason_Category__c}" />
+            <apex:column value="{!P_Usage.MSD_CORE_Reason_Name__c}" />
+            
          </apex:pageBlockTable>
       </apex:pageBlock>
 
@@ -181,10 +184,9 @@
 
          <apex:pageBlockTable value="{!account.Account_TA_Priorities__r}" var="Priorities" onRowClick="clickElem(this);">
             <apex:column value="{!Priorities.ID}" />
-            <apex:column value="{!Priorities.Name}" />
+            <apex:column value="{!Priorities.MSD_CORE_TA__c}" />
             <apex:column value="{!Priorities.MSD_CORE_TA_Priority_Type__c}" />
             <apex:column value="{!Priorities.MSD_CORE_Priority__c}" />
-            <apex:column value="{!Priorities.MSD_CORE_TA_Priority__c}" />
             
          </apex:pageBlockTable>
       </apex:pageBlock>   
@@ -277,12 +279,14 @@
 
 
       <apex:pageBlockTable value="{!account.Product_Usages__r}" var="P_Usage" onRowClick="clickElem(this);">
-            <apex:column value="{!P_Usage.ID}" />
-            <apex:column value="{!P_Usage.MSD_CORE_Product_Name__c}" />
-            <apex:column value="{!P_Usage.MSD_CORE_Therapeutic_Area_1__c}" />
-            <apex:column value="{!P_Usage.MSD_CORE_Access_Reasons_Desc__c}" />
-            <apex:column value="{!P_Usage.MSD_CORE_Access_Restriction_Type__c}" />
-         </apex:pageBlockTable>
+         <apex:column value="{!P_Usage.ID}" />
+         <apex:column value="{!P_Usage.MSD_CORE_Product_Name__c}" />
+         <apex:column value="{!P_Usage.MSD_CORE_Therapeutic_Area_1__c}" />
+         <apex:column value="{!P_Usage.MSD_CORE_Product_Access__c}" />
+         <apex:column value="{!P_Usage.MSD_CORE_Access_Restriction_Type__c}" />
+         <apex:column value="{!P_Usage.MSD_CORE_Reason_Category__c}" />
+         <apex:column value="{!P_Usage.MSD_CORE_Reason_Name__c}" /> 
+      </apex:pageBlockTable>
    </apex:pageBlock>
 
    <apex:pageBlock mode="maindetail">    <!--Stakeholder Ov-->
@@ -363,13 +367,12 @@
    </apex:relatedList>
 
    <apex:pageBlockTable value="{!account.Account_TA_Priorities__r}" var="Priorities" onRowClick="clickElem(this);">
-      <apex:column value="{!Priorities.ID}" />
-      <apex:column value="{!Priorities.Name}" />
-      <apex:column value="{!Priorities.MSD_CORE_TA_Priority_Type__c}" />
-      <apex:column value="{!Priorities.MSD_CORE_Priority__c}" />
-      <apex:column value="{!Priorities.MSD_CORE_TA_Priority__c}" />
-      
-   </apex:pageBlockTable>
+            <apex:column value="{!Priorities.ID}" />
+            <apex:column value="{!Priorities.MSD_CORE_TA__c}" />
+            <apex:column value="{!Priorities.MSD_CORE_TA_Priority_Type__c}" />
+            <apex:column value="{!Priorities.MSD_CORE_Priority__c}" />
+            
+         </apex:pageBlockTable>
 </apex:pageBlock>   
 
 
